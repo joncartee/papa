@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>React Page</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.2/react.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.2/react-dom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.21.1/babel.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://www.style.j7c5.com/bootstrap-4.3.1-dist/css/bootstrap.css"
+      className=""
+    />
+    <meta charset="UTF-8" />
+
+    <style className=""></style>
+  </head>
+
+  <body>
+    <div
+      className="container-fluid d-flex justify-content-center bg-light text-white align-items-center  min-vh-100"
+      id="appWrap"
+    ></div>
+    <script type="text/babel">
+      class App extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = {};
+          this.onChange = this.onChange.bind(this);
+        }
+
+        onChange(e) {
+          this.setstate({});
+        }
+
+        render() {
+          return (
+            <div
+              className="d-flex flex-column align-items-center border rounded min-vw-50 min-vh-50 justify-content-center"
+              id="app"
+            >
+            Papas Site
+             
+            </div>
+          );
+        }
+      }
+
+      ReactDOM.render(<App />, document.getElementById("appWrap"));
+    </script>
+  </body>
+</html>

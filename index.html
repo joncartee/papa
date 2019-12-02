@@ -2,17 +2,40 @@
 <html lang="en">
   <head>
     <title>React Page</title>
+    <link
+      rel="stylesheet"
+      href="https://www.style.j7c5.com/bootstrap-4.3.1-dist/css/bootstrap.css"
+    />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.2/react.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.2/react-dom.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.21.1/babel.min.js"></script>
     <link
       rel="stylesheet"
-      href="https://www.style.j7c5.com/bootstrap-4.3.1-dist/css/bootstrap.css"
-      className=""
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
     />
+
     <meta charset="UTF-8" />
 
-    <style className=""></style>
+    <style className="">
+      .st40 {
+        fill: #252a26;
+      }
+      .st41 {
+        fill: #ffff00;
+      }
+      .st42 {
+        fill: #cccccc;
+      }
+      .st43 {
+        fill: #f2f2f2;
+      }
+      .st44 {
+        font-family: "HelveticaNeue-MediumCond";
+      }
+      .st45 {
+        font-size: 20px;
+      }
+    </style>
   </head>
 
   <body>
@@ -20,26 +43,127 @@
       className="container-fluid d-flex justify-content-center bg-light text-white align-items-center  min-vh-100"
       id="appWrap"
     ></div>
+    <audio id="voice1" src="./voicemail-300.m4a"></audio>
+    <audio id="voice2" src="./voicemail-950.m4a"></audio>
+
     <script type="text/babel">
       class App extends React.Component {
         constructor(props) {
           super(props);
-          this.state = {};
-          this.onChange = this.onChange.bind(this);
+          this.state = {
+            currentPhoto: 1
+          };
+          this.nextSlide = this.nextSlide.bind(this);
         }
 
-        onChange(e) {
-          this.setstate({});
+        nextSlide() {
+          console.log(this.state)
         }
+
+
 
         render() {
+
+          let x = this.state.currentPhoto
+          console.log(x)
           return (
             <div
-              className="d-flex flex-column align-items-center border rounded min-vw-50 min-vh-50 justify-content-center"
+              className="d-flex flex-column align-items-center border rounded min-vw-100 min-vh-100 justify-content-center"
               id="app"
             >
-            Papas Site
-             
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                xmlnsXlink="http://www.w3.org/1999/xlink"
+                x="0px"
+                y="0px"
+                viewBox="0 0 323 697"
+                xmlSpace="preserve"
+              >
+                <g id="Layer_3">
+                  <rect
+                    id="XMLID_5_"
+                    x="0"
+                    y="0"
+                    className="st40"
+                    width="323"
+                    height="700"
+                  />
+                  <g id="XMLID_130_">
+                    <image
+                      href="./1.jpg"
+                      x="0"
+                      y="25"
+                      height="390px"
+                      width="321px"
+                    />
+                    <path
+                      onClick={function() {
+                        const sound = document.getElementById("voice2");
+                        sound.play();
+                      }}
+                      id="XMLID_8_"
+                      className="st42"
+                      d="M294,559.1H29.1c-6.6,0-12-5.4-12-12v-37c0-6.6,5.4-12,12-12H294c6.6,0,12,5.4,12,12v37
+          C306,583.7,300.6,589.1,294,559.1z"
+                    />
+                    <path
+                      onClick={function() {
+                        const sound = document.getElementById("voice1");
+                        sound.play();
+                      }}
+                      id="XMLID_9_"
+                      className="st42"
+                      d="M294,493.4H29.1c-6.6,0-12-5.4-12-12v-37c0-6.6,5.4-12,12-12H294c6.6,0,12,5.4,12,12v37
+          C306,518,300.6,523.4,294,493.4z"
+                    ></path>
+                    />
+                    <path
+                      id="XMLID_10_"
+                      className="st42"
+                      d="M300.6,670.3h-39.3c-2.9,0-5.3-2.4-5.3-5.3v-39.3c0-2.9,2.4-5.3,5.3-5.3h39.3
+          c2.9,0,5.3,2.4,5.3,5.3v39.3C306,667.8,303.6,670.3,300.6,670.3z"
+                    />
+                    <path
+                      onClick={function() {
+                        window.alert(this.state.currentPhoto);
+                      }}  
+                      id="XMLID_11_"
+                      className="st42"
+                      d="M61.7,670.3H22.4c-2.9,0-5.3-2.4-5.3-5.3v-39.3c0-2.9,2.4-5.3,5.3-5.3h39.3
+          c2.9,0,5.3,2.4,5.3,5.3v39.3C67.1,667.8,64.6,670.3,61.7,670.3z"
+                    />
+                    <text
+                      id="XMLID_12_"
+                      transform="matrix(1 0 0 1 108.4626 651.6643)"
+                      className="st43 st44 st45"
+                    >
+                      love you babe
+                    </text>
+                    <image
+                      onClick={function() {
+                        const sound = document.getElementById("voice1");
+                        sound.play();
+                      }}
+                      href="./voice300.png"
+                      x="30"
+                      y="435"
+                      height="57px"
+                      width="267px"
+                    />
+                    <image
+                      onClick={function() {
+                        const sound = document.getElementById("voice2");
+                        sound.play();
+                      }}
+                      href="./voice950.png"
+                      x="30"
+                      y="500"
+                      height="57px"
+                      width="267px"
+                    />
+                  </g>
+                </g>
+              </svg>
             </div>
           );
         }

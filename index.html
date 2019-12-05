@@ -35,6 +35,27 @@
       .st45 {
         font-size: 20px;
       }
+      #previous{
+      left:5px;
+      bottom:5px;
+      position:fixed;
+      z-index:150;
+      _position:absolute;
+      }
+      #next{    
+      right:5px;
+      bottom:5px;
+      position:fixed;
+      z-index:150;
+      _position:absolute;
+      }
+      .buttons{
+        height:50px;
+        width:100px;
+        border-radius: 5px;
+        box-shadow: 0 0 5px  whitesmoke;
+      }
+    </style>
     </style>
   </head>
 
@@ -54,13 +75,21 @@
             currentPhoto: 1
           };
           this.nextSlide = this.nextSlide.bind(this);
+          this.previous= this.previous.bind(this);
+          this.next= this.next.bind(this);
         }
+
 
         nextSlide() {
           console.log(this.state)
         }
 
-
+        previous() {
+          console.log("Clicked Previous")
+        }
+       next() {
+         console.log("Clicked Next")
+        }
 
         render() {
 
@@ -68,9 +97,11 @@
           console.log(x)
           return (
             <div
-              className="d-flex flex-column align-items-center border rounded min-vw-100 min-vh-100 justify-content-center"
+              className="d-flex flex-column align-items-center borders rounded min-vw-100 min-vh-100 justify-content-center bg-dark"
               id="app"
-            >
+            
+              >
+            <img className="img-fluid vh-100 borders rounded-lg"  src="./1.jpg" alt="Russ Wright" />
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 xmlnsXlink="http://www.w3.org/1999/xlink"
@@ -79,23 +110,8 @@
                 viewBox="0 0 323 697"
                 xmlSpace="preserve"
               >
-                <g id="Layer_3">
-                  <rect
-                    id="XMLID_5_"
-                    x="0"
-                    y="0"
-                    className="st40"
-                    width="323"
-                    height="700"
-                  />
+                  
                   <g id="XMLID_130_">
-                    <image
-                      href="./1.jpg"
-                      x="0"
-                      y="25"
-                      height="390px"
-                      width="321px"
-                    />
                     <path
                       onClick={function() {
                         const sound = document.getElementById("voice2");
@@ -117,28 +133,6 @@
           C306,518,300.6,523.4,294,493.4z"
                     ></path>
                     />
-                    <path
-                      id="XMLID_10_"
-                      className="st42"
-                      d="M300.6,670.3h-39.3c-2.9,0-5.3-2.4-5.3-5.3v-39.3c0-2.9,2.4-5.3,5.3-5.3h39.3
-          c2.9,0,5.3,2.4,5.3,5.3v39.3C306,667.8,303.6,670.3,300.6,670.3z"
-                    />
-                    <path
-                      onClick={function() {
-                        window.alert(this.state.currentPhoto);
-                      }}  
-                      id="XMLID_11_"
-                      className="st42"
-                      d="M61.7,670.3H22.4c-2.9,0-5.3-2.4-5.3-5.3v-39.3c0-2.9,2.4-5.3,5.3-5.3h39.3
-          c2.9,0,5.3,2.4,5.3,5.3v39.3C67.1,667.8,64.6,670.3,61.7,670.3z"
-                    />
-                    <text
-                      id="XMLID_12_"
-                      transform="matrix(1 0 0 1 108.4626 651.6643)"
-                      className="st43 st44 st45"
-                    >
-                      love you babe
-                    </text>
                     <image
                       onClick={function() {
                         const sound = document.getElementById("voice1");
@@ -162,8 +156,10 @@
                       width="267px"
                     />
                   </g>
-                </g>
               </svg>
+              <button className="buttons" id="previous" 
+              onClick={this.previous}>Previous</button>
+              <button className="buttons" id="next" onClick={this.next}>Next</button>
             </div>
           );
         }

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>React Page</title>
+    <title>In Loving Memory...</title>
     <link
       rel="stylesheet"
       href="https://www.style.j7c5.com/bootstrap-4.3.1-dist/css/bootstrap.css"
@@ -17,164 +17,198 @@
     <meta charset="UTF-8" />
 
     <style className="">
-      .st40 {
-        fill: #252a26;
+      @font-face {
+    font-family: Helvetica;
+    src:url("./Helvetica.ttf");
+}
+      p{
+        font-size:3em;
+        font-family: Helvetica;
       }
-      .st41 {
-        fill: #ffff00;
+      #play {
+        bottom: 5px;
+        position: fixed;
+        z-index: 150;
+        _position: absolute;
       }
-      .st42 {
-        fill: #cccccc;
+      #voice101 {
+        max-width:20vw;
+        bottom: 7px;
+        left:20vw;
+        position: fixed;
+        z-index: 150;
+        _position: absolute;
       }
-      .st43 {
-        fill: #f2f2f2;
+      #voice102 {
+        max-width:20vw;
+        bottom: 7px;
+        right:20vw;
+        position: fixed;
+        z-index: 150;
+        _position: absolute;
       }
-      .st44 {
-        font-family: "HelveticaNeue-MediumCond";
+
+      #previous {
+        left: 5px;
+        bottom: 5px;
+        position: fixed;
+        z-index: 150;
+        _position: absolute;
       }
-      .st45 {
-        font-size: 20px;
+      #next {
+        right: 5px;
+        bottom: 5px;
+        position: fixed;
+        z-index: 150;
+        _position: absolute;
       }
-      #previous{
-      left:5px;
-      bottom:5px;
-      position:fixed;
-      z-index:150;
-      _position:absolute;
+      .voice {
+        max-height: 50px;
       }
-      #next{    
-      right:5px;
-      bottom:5px;
-      position:fixed;
-      z-index:150;
-      _position:absolute;
+
+      #app {
+        background-image: url("./bkg.png");
       }
-      .buttons{
-        height:50px;
-        width:100px;
-        border-radius: 5px;
-        box-shadow: 0 0 5px  whitesmoke;
+
+      img {
+        max-height: 100vh;
       }
-    </style>
     </style>
   </head>
 
   <body>
     <div
-      className="container-fluid d-flex justify-content-center bg-light text-white align-items-center  min-vh-100"
+      className=" container-fluid d-flex justify-content-center  align-items-center "
       id="appWrap"
     ></div>
     <audio id="voice1" src="./voicemail-300.m4a"></audio>
     <audio id="voice2" src="./voicemail-950.m4a"></audio>
 
     <script type="text/babel">
-
       class App extends React.Component {
         constructor(props) {
           super(props);
           this.state = {
-            currentPhoto:1
+            currentPhoto: 1,
+            id: 0,
+            isPlaying: false,
+            playBtnColor: "bg-success"
           };
           this.nextSlide = this.nextSlide.bind(this);
-          this.previous= this.previous.bind(this);
-          this.next= this.next.bind(this);
+          this.previous = this.previous.bind(this);
+          this.next = this.next.bind(this);
+          this.play = this.play.bind(this);
         }
 
+        nextSlide(x) {
+          let y = this.state.currentPhoto + x;
+          if (y < 1) {
+            y = 17;
+          } else if (y > 17) {
+            y = 1;
+          }
+          console.log(y);
 
-        nextSlide() {
-          console.log(this.state)
-          let y = this.state.currentPhoto+1
-          y===18?y=1:y=y
-          console.log(y)
-          this.setState({currentPhoto:y})
+          this.setState({ currentPhoto: y });
         }
 
-        timer(){
-          setInterval(x=>{this.nextSlide()},10000)
+        timer() {
+          console.log("SlideShow Started");
+          let id = setInterval(x => {
+            this.nextSlide(1);
+          }, 10000);
+          this.setState({
+            id: id,
+            isPlaying: true,
+            playBtnColor: "bg-success"
+          });
         }
 
-        componentDidMount(){
-          console.log('Mounted')
-          this.timer()          
+        componentDidMount() {
+          this.timer();
+        }
+        play() {
+          this.state.isPlaying === false ? this.timer() : this.pause();
+        }
+        pause() {
+          console.log("SlideShow Paused");
+          clearInterval(this.state.id);
+          this.setState({
+            isPlaying: false,
+            playBtnColor: "bg-danger"
+          });
         }
 
         previous() {
-          console.log("Clicked Previous")
+          this.pause();
+          this.nextSlide(-1);
         }
-       next() {
-         console.log("Clicked Next")
+        next() {
+          this.pause();
+          this.nextSlide(1);
         }
 
         render() {
+          let photo = "./" + this.state.currentPhoto + ".jpg";
 
-
-          let photo = "./"+this.state.currentPhoto+".jpg"
-          console.log(photo)
           return (
             <div
-              className="d-flex flex-column align-items-center borders rounded min-vw-100 min-vh-100 justify-content-center bg-dark"
+              className="d-flex min-vh-100 flex-column align-items-center borders rounded  justify-content-center "
               id="app"
-            
+            >
+            <p className="m-3 text-muted">love you babe</p>
+              <img
+                className=" m-2 img-fluid border max-vh-100 rounded-lg"
+                src={photo}
+                alt="Russ Wright"
+              />
+              <img
+              id="voice102"
+                className="voice w-50 m-2 border rounded-lg shadow"
+                src="./voice300.png"
+                onClick={x => {
+                  const sound = document.getElementById("voice2");
+                  sound.play();
+                }}
+              />
+              <img
+              id="voice101"
+                className="voice w-50 m-2 border rounded-lg shadow"
+                src="./voice950.png"
+                onClick={x => {
+                  const sound = document.getElementById("voice1");
+                  sound.play();
+                }}
+
+              />
+
+              <button
+
+                className="btn bg-info border rounded"
+                id="previous"
+                onClick={this.previous}
               >
-            <img className="img-fluid vh-100 borders rounded-lg"  src="./1.jpg" alt="Russ Wright" />
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                xmlnsXlink="http://www.w3.org/1999/xlink"
-                x="0px"
-                y="0px"
-                viewBox="0 0 323 697"
-                xmlSpace="preserve"
+                <i className="fa fa-arrow-left fa-5x"></i>
+              </button>
+              <button
+                className={"btn border rounded " + this.state.playBtnColor}
+                id="play"
+                onClick={this.play}
               >
-                  
-                  <g id="XMLID_130_">
-                    <path
-                      onClick={function() {
-                        const sound = document.getElementById("voice2");
-                        sound.play();
-                      }}
-                      id="XMLID_8_"
-                      className="st42"
-                      d="M294,559.1H29.1c-6.6,0-12-5.4-12-12v-37c0-6.6,5.4-12,12-12H294c6.6,0,12,5.4,12,12v37
-          C306,583.7,300.6,589.1,294,559.1z"
-                    />
-                    <path
-                      onClick={function() {
-                        const sound = document.getElementById("voice1");
-                        sound.play();
-                      }}
-                      id="XMLID_9_"
-                      className="st42"
-                      d="M294,493.4H29.1c-6.6,0-12-5.4-12-12v-37c0-6.6,5.4-12,12-12H294c6.6,0,12,5.4,12,12v37
-          C306,518,300.6,523.4,294,493.4z"
-                    ></path>
-                    />
-                    <image
-                      onClick={function() {
-                        const sound = document.getElementById("voice1");
-                        sound.play();
-                      }}
-                      href="./voice300.png"
-                      x="30"
-                      y="435"
-                      height="57px"
-                      width="267px"
-                    />
-                    <image
-                      onClick={function() {
-                        const sound = document.getElementById("voice2");
-                        sound.play();
-                      }}
-                      href="./voice950.png"
-                      x="30"
-                      y="500"
-                      height="57px"
-                      width="267px"
-                    />
-                  </g>
-              </svg>
-              <button className="buttons" id="previous" 
-              onClick={this.previous}>Previous</button>
-              <button className="buttons" id="next" onClick={this.next}>Next</button>
+                {this.state.isPlaying === true ? (
+                  <i className="fa fa-pause fa-5x"></i>
+                ) : (
+                  <i className="fa fa-play-circle fa-5x"></i>
+                )}
+              </button>
+              <button
+
+                className="btn bg-info border rounded"
+                id="next"
+                onClick={this.next}
+              >
+                <i className="fa fa-arrow-right fa-5x"></i>
+              </button>
             </div>
           );
         }

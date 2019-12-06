@@ -47,25 +47,41 @@
     <audio id="voice2" src="./voicemail-950.m4a"></audio>
 
     <script type="text/babel">
+
       class App extends React.Component {
         constructor(props) {
           super(props);
           this.state = {
-            currentPhoto: 1
+            currentPhoto:1
           };
           this.nextSlide = this.nextSlide.bind(this);
+          this.timer = this.timer.bind(this);
         }
 
         nextSlide() {
           console.log(this.state)
+          let y = this.state.currentPhoto+1
+          y===18?y=1:y=y
+          console.log(y)
+          this.setState({currentPhoto:y})
+        }
+
+        timer(){
+          setInterval(x=>{this.nextSlide()},10000)
+        }
+
+        componentDidMount(){
+          console.log('Mounted')
+          this.timer()          
         }
 
 
 
         render() {
 
-          let x = this.state.currentPhoto
-          console.log(x)
+
+          let photo = "./"+this.state.currentPhoto+".jpg"
+          console.log(photo)
           return (
             <div
               className="d-flex flex-column align-items-center border rounded min-vw-100 min-vh-100 justify-content-center"
@@ -90,7 +106,7 @@
                   />
                   <g id="XMLID_130_">
                     <image
-                      href="./1.jpg"
+                      href={photo}
                       x="0"
                       y="25"
                       height="390px"
@@ -164,6 +180,8 @@
                   </g>
                 </g>
               </svg>
+              <button id='previous'>Previous</button>
+              <button id='next'>Next</button>
             </div>
           );
         }
